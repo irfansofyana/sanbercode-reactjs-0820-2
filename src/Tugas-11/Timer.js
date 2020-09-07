@@ -1,5 +1,4 @@
-import React, {Component} from 'react'
-import { unmountComponentAtNode } from "react-dom";
+import React, {Component} from 'react';
 
 class Timer extends Component{
   constructor(props){
