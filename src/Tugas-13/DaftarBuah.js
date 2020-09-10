@@ -22,7 +22,17 @@ const DaftarBuah = () => {
           let index = indexForm
           
           if (index === -1){
-            newDaftarBuah = [...newDaftarBuah, {nama, harga, berat}]
+            // newDaftarBuah = [...newDaftarBuah, {nama, harga, berat}]
+            axios.post(`http://backendexample.sanbercloud.com/api/fruits`, {
+                name: nama,
+                price: harga,
+                weight: berat
+            }).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.error(err);
+            })
+
           }else{
             newDaftarBuah[index] = {nama, harga, berat}
           }
