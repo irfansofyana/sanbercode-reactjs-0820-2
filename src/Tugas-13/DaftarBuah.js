@@ -1,15 +1,11 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import "./DaftarBuah.css"
+
+import axios from "axios";
 
 const DaftarBuah = () => {
     const [inputName, setInputName] = useState("");
-    const [daftarBuah, setDaftarBuah] = useState([
-      {nama: "Semangka", harga: 10000, berat: 1000},
-      {nama: "Anggur", harga: 40000, berat: 500},
-      {nama: "Strawberry", harga: 30000, berat: 400},
-      {nama: "Jeruk", harga: 30000, berat: 1000},
-      {nama: "Mangga", harga: 30000, berat: 500}
-    ]);
+    const [daftarBuah, setDaftarBuah] = useState([]);
     const [inputBerat, setInputBerat] = useState(0);
     const [inputHarga, setInputHarga] = useState("");
     const [indexForm, setIndexForm] = useState(-1);
@@ -84,6 +80,22 @@ const DaftarBuah = () => {
           default: break;
         }
     }
+
+    useEffect( () => {
+        axios.get(`http://backendexample.sanbercloud.com/api/fruits`)
+        .then(res => {
+            const db = res.data.map((el) => {
+                return {
+                    id: el.id,
+                    nama: el.name,
+                    harga: el.price,
+                    berat: el.weight
+                }
+            });
+
+            setDaftarBuah(db);
+        });
+    });
 
     return (
         <>
